@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.22)
+project(DriveKeys LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+find_package(gz_gui_vendor REQUIRED)
+find_package(gz-gui REQUIRED)
+find_package(Qt6 REQUIRED COMPONENTS Core Quick Qml)
+add_library(DriveKeys SHARED DriveKeys.cc DriveKeys.hh DriveKeys.qrc)
+target_link_libraries(DriveKeys PRIVATE gz-gui::gz-gui Qt6::Core Qt6::Quick Qt6::Qml)
+# Explicitly loaded only by the UI integration check, never by the normal GUI.
+add_library(InputProbe SHARED InputProbe.cc InputProbe.hh InputProbe.qrc)
+target_link_libraries(InputProbe PRIVATE gz-gui::gz-gui Qt6::Core Qt6::Quick Qt6::Qml)

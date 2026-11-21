@@ -1,0 +1,118 @@
+# Configurable ArUco marker list for Gazebo (textured 3D panels) and RViz2 (/aruco/markers).
+# size_cm accepts [width_cm, height_cm] or a single scalar (default 20 x 20 cm).
+# Re-run `.venv/bin/python gazebo/build_world.py` after editing this file.
+
+defaults:
+  dictionary: DICT_4X4_50
+  size_cm: [20.0, 20.0]
+  border_bits: 1
+  white_margin_ratio: 0.15
+  panel_thickness_m: 0.015
+  z_above_ground: 0.45
+  with_post: true
+  double_sided: false
+
+markers:
+  - name: start_tag_0
+    id: 0
+    dictionary: DICT_4X4_50
+    size_cm: [20.0, 20.0]
+    position:
+      x: 32.3
+      y: -33.0
+      z_above_ground: 0.32
+    yaw_deg: 205.0
+    with_post: true
+    role: start_area
+
+  - name: tunnel_start_left
+    id: 10
+    dictionary: DICT_4X4_50
+    size_cm: [20.0, 20.0]
+    position:
+      x: 36.665
+      y: -31.80
+      z_mode: tunnel_entry
+      z_offset: 0.48
+    yaw_deg: 180.0
+    with_post: false
+    double_sided: false
+    role: tunnel_start
+
+  - name: tunnel_start_right
+    id: 11
+    dictionary: DICT_4X4_50
+    size_cm: [20.0, 20.0]
+    position:
+      x: 36.665
+      y: -36.20
+      z_mode: tunnel_entry
+      z_offset: 0.48
+    yaw_deg: 180.0
+    with_post: false
+    double_sided: false
+    role: tunnel_start
+
+  - name: tunnel_end_left
+    id: 20
+    dictionary: DICT_4X4_50
+    size_cm: [20.0, 20.0]
+    position:
+      x: 61.90
+      y: -32.45
+      z_mode: tunnel_floor
+      z_offset: 0.72
+    yaw_deg: 180.0
+    with_post: true
+    double_sided: true
+    role: tunnel_end
+
+  - name: tunnel_end_right
+    id: 21
+    dictionary: DICT_4X4_50
+    size_cm: [20.0, 20.0]
+    position:
+      x: 61.90
+      y: -35.55
+      z_mode: tunnel_floor
+      z_offset: 0.72
+    yaw_deg: 180.0
+    with_post: true
+    double_sided: true
+    role: tunnel_end
+
+  - name: field_tag_5x5
+    id: 5
+    dictionary: DICT_5X5_100
+    size_cm: [20.0, 20.0]
+    position:
+      x: 26.5
+      y: -27.5
+      z_above_ground: 0.45
+    yaw_deg: -60.0
+    with_post: true
+    role: field_waypoint
+
+  - name: field_tag_6x6
+    id: 42
+    dictionary: DICT_6X6_250
+    size_cm: [25.0, 25.0]
+    position:
+      x: 39.0
+      y: -24.0
+      z_above_ground: 0.50
+    yaw_deg: -135.0
+    with_post: true
+    role: field_waypoint
+
+  - name: field_tag_post_tunnel
+    id: 7
+    dictionary: DICT_4X4_50
+    size_cm: [20.0, 20.0]
+    position:
+      x: 76.0
+      y: -34.0
+      z_above_ground: 0.45
+    yaw_deg: 180.0
+    with_post: true
+    role: post_tunnel_target
