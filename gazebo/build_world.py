@@ -1195,11 +1195,6 @@ def build_leo_model(sx: float, sy: float, ground: float):
         '<odom_publish_frequency>30</odom_publish_frequency><dimensions>3</dimensions></plugin>'
     ))
 
-    for mesh in robot.findall('.//mesh'):
-        uri = mesh.get('filename', '')
-        if uri.startswith('package://leo_description/'):
-            mesh.set('filename', str(leo / uri.removeprefix('package://leo_description/')))
-
     E.indent(robot)
     E.ElementTree(robot).write(OUT / 'leo_lidar.urdf', encoding='unicode', xml_declaration=True)
     r = subprocess.run(['gz', 'sdf', '-p', str(OUT / 'leo_lidar.urdf')], capture_output=True, text=True, check=True)
@@ -1207,6 +1202,10 @@ def build_leo_model(sx: float, sy: float, ground: float):
     sdf = E.fromstring(r.stdout)
     model = sdf.find('model')
     model.set('name', 'leo_rover')
+    for uri_el in model.findall('.//uri'):
+        uri = uri_el.text or ''
+        if uri.startswith(('model://leo_description/', 'package://leo_description/')):
+            uri_el.text = str(leo / uri.split('leo_description/', 1)[1])
     E.SubElement(model, 'pose').text = f'{sx} {sy} {ground + 0.15} 0 0 0'
     for axis in model.findall('.//axis'):
         for mimic in axis.findall('mimic'):
